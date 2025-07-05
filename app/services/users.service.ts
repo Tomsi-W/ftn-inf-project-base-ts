@@ -9,3 +9,14 @@ export function addUser(user: User): void {
 export function getUsers(): User[] {
   return [...users]; // másolatot ad vissza
 }
+
+export function getUserById(id: string): User | undefined {
+  return users.find(u => u.id === id);
+}
+
+export function updateUser(updatedUser: User): void {
+  const index = users.findIndex(u => u.id === updatedUser.id);
+  if (index !== -1) {
+    users[index] = updatedUser;
+  }
+}
