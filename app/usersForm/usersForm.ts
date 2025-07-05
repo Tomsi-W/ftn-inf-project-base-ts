@@ -1,5 +1,5 @@
 import { User } from "../models/user.model";
-import { addUser, getUsers, updateUser } from "../services/users.service";
+import { addUser, getUsers, updateUser, deleteUser } from "../services/users.service";
 import "./usersForm.scss";
 
 // HTML elemek
@@ -48,7 +48,7 @@ usersForm.addEventListener("submit", (e: SubmitEvent) => {
   editingUserId = null;
 });
 
-// Lista kirajzolása szerkesztés gombokkal
+// Lista kirajzolása szerkesztés + törlés gombokkal
 function renderUsers(): void {
   usersList.innerHTML = "";
 
@@ -58,6 +58,7 @@ function renderUsers(): void {
     div.innerHTML = `
       ${user.ime} ${user.prezime} (${user.email}) - ${user.godina}
       <button data-id="${user.id}" class="edit-btn">Izmeni</button>
+      <button data-id="${user.id}" class="delete-btn">Obriši</button>
     `;
     usersList.appendChild(div);
   });
@@ -78,6 +79,15 @@ function renderUsers(): void {
         showFormBtn.style.display = "none";
         submitButton.textContent = "Sačuvaj izmene";
       }
+    });
+  });
+
+  const deleteButtons = usersList.querySelectorAll(".delete-btn");
+  deleteButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      const id = (button as HTMLButtonElement).dataset.id!;
+      deleteUser(id);
+      renderUsers(); // újrarenderelés törlés után
     });
   });
 }

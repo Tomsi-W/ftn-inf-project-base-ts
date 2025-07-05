@@ -20,3 +20,10 @@ export function updateUser(updatedUser: User): void {
     users[index] = updatedUser;
   }
 }
+
+export function deleteUser(id: string): void {
+  const index = users.findIndex(u => u.id === id);
+  if (index !== -1) {
+    users.splice(index, 1);
+  }
+}
