@@ -13,6 +13,22 @@
     <input type="email" id="email" required />
     <label>Godina rođenja:</label>
     <input type="number" id="godina" required />
-    <button type="submit">Dodaj korisnika</button>
+
+     <!-- Gombhoz tooltip ID-val -->
+    <button id="saveBtn" type="submit" aria-describedby="saveTooltip">
+      Dodaj korisnika
+    </button>
+    <!-- Tooltip -->
+    <div id="saveTooltip" role="tooltip" class="tooltip" aria-hidden="true">
+      Korisnik će biti sačuvan.
+    </div>
+    <!-- Hibaüzenet -->
+    <div id="formError" class="form-error" aria-live="polite"></div>
+
   </form>
+</div>
+
+<!-- Spinner overlay -->
+<div id="globalSpinner" class="spinner-overlay" hidden>
+  <div class="spinner"></div>
 </div>
